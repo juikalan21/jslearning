@@ -40,3 +40,31 @@ console.log(myFunction); //function - object function
 console.log(typeof heros); //object
 
 console.log(typeof Symbol); //function
+
+// ******************************************************
+
+// Memory - Stack (Primitive), heap (non primitive)
+// we get the copy of memory in stack
+// we get the reference to the original memory in heap
+
+//Stack example
+let myYoutubeName = "akiracodes"
+
+let anothername = myYoutubeName
+anothername = "juicodez"
+console.log(myYoutubeName); //akiracodes
+console.log(anothername); //juicodez
+
+//Heap example
+let user = {
+    email : "user@google.com",
+    upi : "userbyljfbejr12"
+}
+
+let user2 = user
+
+user2.email = "jui@google.com"
+
+console.log(user.email);
+console.log(user2.email); 
+//both will print jui@google.com
