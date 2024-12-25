@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>htnml Events </title>
+</head>
+<body style="background-color: #414141; color: aliceblue;">
+    <h2>Amazing image</h2>
+    <div >
+        <ul id="images">
+            <li><img width="200px" id="photoshop" src="https://images.pexels.com/photos/3561339/pexels-photo-3561339.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt="photoshop"></li>
+            <li><img width="200px" id="japan" src="https://images.pexels.com/photos/3532553/pexels-photo-3532553.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""></li>
+            <li><img width="200px" id="river" src="https://images.pexels.com/photos/3532551/pexels-photo-3532551.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""></li>
+            <li><img width="200px" id="owl" src="https://images.pexels.com/photos/3532552/pexels-photo-3532552.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt="" ></li>
+            <li><img width="200px" id="prayer" src="https://images.pexels.com/photos/2522671/pexels-photo-2522671.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""></li>
+            <li><a style="color: aliceblue;" href="https://google.com" id="google">Google</a></li>
+        </ul>
+   </div>
+</body>
+<script>
+    //javascript me har event sequencially he run hote hai -  but have some exceptions
+    //events invoke at an activity - move mouse, drag drop, etc
+    // line 15  alt="" onclick="alert('owl')" //not a feasible approach - avoid this in html
+    // now second approach
+
+    /* document.getElementById('owl').onclick = function(){
+        alert("owl clicked") //still a problem - use event listeners because it also gives propagation ability - onclick gives less features
+    }
+ */
+    //attachEvent()
+    //jQuery - on
+
+    //best approach
+    /* document.getElementById('owl').addEventListener('click', function(){
+        alert("owl clicked again")
+    }) //check events name on mdn ,default false after function */
+
+    //event object
+    /* document.getElementById('owl').addEventListener('click', function(e){
+        console.log(e);
+    },false) //false is default */
+
+    //events to know - type, timestamp, defaultPrevented,target, toElement, srcElement, currentTarget, clientX, clientY, screenX, screenY - position realated, altkey, ctrlkey, shiftkey, keyCode - access
+
+    //event propagation - event bubbling(default - false), event capturing (true)
+
+    //targetting different ids
+    /* document.getElementById('images').addEventListener('click', function(e){
+        console.log("clicked inside the ul");
+    },false)
+
+    document.getElementById('owl').addEventListener('click', function(e){
+        console.log("owl clicked"); //owl bhi ul ke andar he hai toh top wala code bhi activate hona chahiye
+        e.stopPropagation() //event will not bubble
+    },false) */
+
+    //in event propagation - bubbling up - niche se upar jaana - inner element => li => ul (to bigger element)
+    
+    //prevent default - will stop the redirection to google
+    /* document.getElementById('google').addEventListener/*  *//* ('click', function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        console.log("google clicked");
+    },false) */ 
+
+    //image click karu and wo gayab hojaye
+    //select all images first
+    //taking ul approach
+
+    document.querySelector('#images').addEventListener('click', function(e){
+        console.log(e.target.tagName);
+        //strict checks - event spilover
+        if(e.target.tagName === 'IMG'){
+            console.log(e.target.id);
+            let removeIt = e.target.parentNode
+            removeIt.remove()
+        
+        }
+        
+        //removeIt.parentNode.removeChild(removeIt)
+    },false)
+    
+</script>
