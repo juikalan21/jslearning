@@ -16,6 +16,8 @@
 
 //pending fulfilled and rejected
 
+// history - Q and blue bird library - now nodejs has given support
+
 //1 - creating promise - takes call back - call back hell reduction
 //two parts of promise - resolve and rejection
 const promiseOne = new Promise(function(resolve,reject){
@@ -123,7 +125,12 @@ fetch('https://api.github.com/users/juikalan21')
 //value is printing first
 
 
+//fetch returns a promise
+//response = fetch('something')
 
+//some part first goes to data - reserves a space in memory data
+//data is empty initially
+//includes - onFulfilled[] and onRejection[] arrays
 
-// history - Q and blue bird library - now nodejs has given support
-
+//the other part goes to web browsers/node - to handle API, makes network request
+ //example - error 404 is also included in the onFulfilled[] array
