@@ -1,17 +1,25 @@
+//do an async task
+
+//database calls , cryptography related, network related
+
 // less concept of classes 
+
 //more reference to objects
-//promise is an object
+
+//promise is an object used in asynchronous js
+
 //The Promise object represents the eventual completion (or failure) of an asynchronous operation and its resulting value.
+
 //task is in queue but it will not be executed - not yet completed
 
 //its not necessary to access everything everytime
+
 //pending fulfilled and rejected
 
 //1 - creating promise - takes call back - call back hell reduction
 //two parts of promise - resolve and rejection
 const promiseOne = new Promise(function(resolve,reject){
-    //do an aysnc task
-    //database calls , cryptography related, network related
+    
     setTimeout(function(){
         console.log('Async task is completed');
         resolve() //now its connected with .then
@@ -20,6 +28,7 @@ const promiseOne = new Promise(function(resolve,reject){
 
 //consuming 
 //then connection with resolve
+
 promiseOne.then(function(){ //call back - function milta hai, this function automatically recieves an arguement whose work is to return the value from the above function
     console.log("promise consumed"); //async task is completed but the promised is not completely consumed
 
@@ -65,7 +74,7 @@ promiseFour.then((user) => {
 
 const promiseFive = new Promise(function(resolve,reject){
     setTimeout(function(){
-        let error = true //if false then error
+        let error = true //if false then no error
         if (!error){
             resolve({username:"javascript", password:"123"})
         } else {
@@ -75,11 +84,43 @@ const promiseFive = new Promise(function(resolve,reject){
 })
 
 async function consumePromiseFive(){
-    const response = await promiseFive
-    console.log(response);
+    try{ //use try and catch to handle errors
+        const response = await promiseFive
+    console.log(response); //async await cannot handle errors directly
+    } catch (error){
+        console.log(error);
+    }
 }
+
 consumePromiseFive()
 
+//behind the scenes - 
+/* 
+async function getAllUsers(){
+    try {
+        const response = await fetch('https://api.github.com/users/juikalan21')
+        //console.log(response); //now we can see the results
+        const data =  await response.json()
+        console.log(data);
+    } catch (error) {
+        console.log("Error", error);
+    }
+}
+
+getAllUsers() */ //print hua he nahi - try catch me wrap kardete hai - still it will not print - no data response
+
+// there is no problem in code - response.json takes time to convert - so add await
+
+fetch('https://api.github.com/users/juikalan21')
+.then((response) =>{ //arrow function - //data muje milne wala hai 
+    return response.json() 
+})
+.then((data) => {
+    console.log(data);
+}) //handling response.json
+.catch((error) => console.log(error)) //error handling
+
+//value is printing first
 
 
 
