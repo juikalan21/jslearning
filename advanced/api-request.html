@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background-color: #212121;">
+    0	UNSENT	Client has been created. open() not called yet.
+1	OPENED	open() has been called.
+2	HEADERS_RECEIVED	send() has been called, and headers and status are available.
+3	LOADING	Downloading; responseText holds partial data.
+4	DONE	The operation is complete. 
+</body>
+<script>
+    const requestUrl = 'https://api.github.com/users/juikalan21'
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', requestUrl)
+    //continuously track
+    xhr.onreadystatechange = function(){
+        console.log(xhr.readyState); //234
+        //detecting state
+        if (xhr.readyState == 4){
+            const data = JSON.parse(this.responseText) //converting string to JSON
+            console.log(typeof data); //string - after parsing - object bangya hai
+            console.log(data.followers); //undefined
+        } //assignment - take out photo url from the object and followers. Make one card from that info. And after getting data from the body make a button - where on clicking the button that card with all info of photo url and follower count should be visible
+    }
+    //console is technically not a part of javascript
+    //even document
+    //console.log is a debugging tool - dev tool - injects runtime
+    //nodejs - implementation of v8 engine - written ic c++
+    //javascript is a wrapper above c++
+    //d8 - d8-console.cc //code of console log
+    // writeToFile - main method
+    xhr.send();
+</script>
+</html>
